@@ -4,6 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#432B42"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="#9E9E9E"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search"
+        android:inputType="text"
+        app:searchIcon="@drawable/search_icon"
+        app:closeIcon="@drawable/close_icon"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
