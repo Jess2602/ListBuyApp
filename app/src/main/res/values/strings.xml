@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">ListBuyApp</string>
+    <string name="app_name">ListBuy</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_history">History</string>
+    <string name="menu_categories">Categories</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

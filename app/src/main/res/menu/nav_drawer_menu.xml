@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:checkable="true"
+            android:icon="@drawable/home_icon"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/history"
+            android:checkable="true"
+            android:icon="@drawable/history_icon"
+            android:title="@string/menu_history" />
+        <item
+            android:id="@+id/categories"
+            android:checkable="true"
+            android:icon="@drawable/categories_icon"
+            android:title="@string/menu_categories" />
+    </group>
+
+
+    <item android:title="Cerrar">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/salir"
+                    android:checkable="true"
+                    android:icon="@drawable/close_icon"
+                    android:title="Salir" />
+            </group>
+        </menu>
+
+
+    </item>
+</menu>
