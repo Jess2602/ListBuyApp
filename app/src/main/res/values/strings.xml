@@ -6,4 +6,6 @@
     <string name="menu_history">History</string>
     <string name="menu_categories">Categories</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="testing">hey</string>
+    <string name="background_description">background</string>
 </resources>

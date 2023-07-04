@@ -11,7 +11,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Thread.sleep(600)
         screenSplash.setKeepOnScreenCondition { true }
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, Login::class.java))
         finish()
     }
 }
