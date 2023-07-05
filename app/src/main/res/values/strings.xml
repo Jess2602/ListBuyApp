@@ -8,4 +8,13 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="testing">hey</string>
     <string name="background_description">background</string>
+    <string name="add">Add</string>
+    <string name="task_name">task name</string>
+    <string name="addlist">addList</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_list">new list</string>
+    <string name="list_name">List Name</string>
+    <string name="category">category</string>
+    <string name="listcategory">listCategory</string>
 </resources>
