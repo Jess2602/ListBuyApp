@@ -22,14 +22,19 @@
     </group>
 
 
-    <item android:title="Cerrar">
+    <item android:title="Close">
         <menu>
             <group>
                 <item
-                    android:id="@+id/salir"
+                    android:id="@+id/logOut"
+                    android:checkable="true"
+                    android:icon="@drawable/back_icon"
+                    android:title="Log Out" />
+                <item
+                    android:id="@+id/left"
                     android:checkable="true"
                     android:icon="@drawable/close_icon"
-                    android:title="Salir" />
+                    android:title="left" />
             </group>
         </menu>
 

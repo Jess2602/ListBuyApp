@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(homeFragment(), item.title.toString())
                 R.id.history -> replaceFragment(historyFragment(), item.title.toString())
                 R.id.categories -> replaceFragment(categoriesFragment(), item.title.toString())
-                R.id.salir -> finish()
+                R.id.logOut -> finish()
+                R.id.left -> finish()
             }
             true
         }
