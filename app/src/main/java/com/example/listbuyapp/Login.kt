@@ -17,11 +17,13 @@ class Login : AppCompatActivity() {
             // Aquí puedes agregar el código para pasar al MainActivity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
         }
         binding.SingUp.setOnClickListener {
             // Aquí puedes agregar el código para pasar al MainActivity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
         }
     }
 }

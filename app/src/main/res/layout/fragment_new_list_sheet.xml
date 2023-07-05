@@ -5,8 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
     android:background="@drawable/fondo_app"
     tools:context=".NewListSheet">
+
 
 
     <TextView
@@ -30,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/listName"
-            android:hint="Name"/>
+            android:hint="@string/list_name"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,6 +57,9 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/botonbase"
+        android:layout_marginBottom="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
