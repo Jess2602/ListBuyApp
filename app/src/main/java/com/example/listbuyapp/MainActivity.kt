@@ -64,10 +64,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(homeFragment(), item.title.toString())
                 R.id.history -> replaceFragment(historyFragment(), item.title.toString())
                 R.id.categories -> replaceFragment(categoriesFragment(), item.title.toString())
-<<<<<<< Updated upstream
-                R.id.logOut -> finish()
-                R.id.left -> finish()
-=======
                 R.id.logOut -> {
                     val prefs = getSharedPreferences(
                         getString(R.string.prefs_file),
@@ -78,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signOut()
                     onBackPressed()
                 }
->>>>>>> Stashed changes
             }
             true
         }

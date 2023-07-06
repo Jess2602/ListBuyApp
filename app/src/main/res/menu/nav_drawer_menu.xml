@@ -27,20 +27,10 @@
             <group>
                 <item
                     android:id="@+id/logOut"
-<<<<<<< Updated upstream
                     android:checkable="true"
                     android:icon="@drawable/back_icon"
                     android:title="Log Out" />
-                <item
-                    android:id="@+id/left"
-                    android:checkable="true"
-                    android:icon="@drawable/close_icon"
-                    android:title="left" />
-=======
-                    android:checkable="true"
-                    android:icon="@drawable/back_icon"
-                    android:title="LogOut" />
->>>>>>> Stashed changes
+
             </group>
         </menu>
 

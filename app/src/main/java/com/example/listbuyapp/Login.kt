@@ -26,12 +26,8 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-<<<<<<< Updated upstream
-        binding.SingIn.setOnClickListener {
-            // Aquí puedes agregar el código para pasar al MainActivity
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-=======
+
+
         setUp()
         session()
 
@@ -45,17 +41,11 @@ class Login : AppCompatActivity() {
 
         if (email != null && provider != null&& uid != null) {
             showHome(email, uid ,ProviderType.valueOf(provider))
->>>>>>> Stashed changes
         }
     }
 
     private fun setUp() {
         binding.SingUp.setOnClickListener {
-<<<<<<< Updated upstream
-            // Aquí puedes agregar el código para pasar al MainActivity
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-=======
             if (binding.TextFieldEmail.text.toString()
                     .isNotEmpty() && binding.TextFieldPass.text.toString().isNotEmpty()
             ) {
@@ -103,7 +93,7 @@ class Login : AppCompatActivity() {
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
->>>>>>> Stashed changes
+
         }
     }
 

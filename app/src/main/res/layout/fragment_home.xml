@@ -25,6 +25,17 @@
         app:searchIcon="@drawable/search_icon" />
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerlistname"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:layout_constraintWidth_percent="0.9" />
 
     <FrameLayout
         android:layout_width="65dp"
@@ -40,7 +51,6 @@
             android:src="@mipmap/button_agregar" />
 
     </FrameLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
