@@ -17,4 +17,5 @@
     <string name="list_name">List Name</string>
     <string name="category">category</string>
     <string name="listcategory">listCategory</string>
+    <string name="prefs_file">com.example.listbuyapp.FILE_KEY</string>
 </resources>

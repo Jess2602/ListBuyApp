@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "902889638675",
+    "project_id": "listbuy-69a83",
+    "storage_bucket": "listbuy-69a83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902889638675:android:4e601ef7151438886d68e6",
+        "android_client_info": {
+          "package_name": "com.example.listbuyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902889638675-2tgqnd8s0vo2pjglghkhu5bngh5h97ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-GgyYejMbsh-tv41MfRkwUJdGoS4b1jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902889638675-2tgqnd8s0vo2pjglghkhu5bngh5h97ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

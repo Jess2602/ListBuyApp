@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/botonbase</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="android:textColor">@android:color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
@@ -25,4 +26,13 @@
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.ListBuyApp</item>
     </style>
+
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/fondo_app</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorPrimary">@color/botonbase</item>
+        <item name="android:colorButtonNormal">@color/botonbase</item>
+        <item name="android:textColorPrimary">@android:color/white</item> <!-- Agregar esta línea -->
+    </style>
+
 </resources>

@@ -25,18 +25,32 @@
         android:id="@+id/SingUp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+<<<<<<< Updated upstream
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/black"
         android:text="SingUp"
         android:textSize="17dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
+=======
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/black"
+        android:text="SingUp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="17dp"
+>>>>>>> Stashed changes
         app:layout_constraintBottom_toTopOf="@+id/SingGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintVertical_bias="0.935"
         app:layout_constraintWidth_percent=".45" />
+=======
+        app:layout_constraintVertical_bias="0.93"
+        app:layout_constraintWidth_percent=".42" />
+>>>>>>> Stashed changes
 
     <Button
         android:id="@+id/SingIn"
@@ -50,13 +64,19 @@
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintVertical_bias="0.934"
         app:layout_constraintWidth_percent=".45" />
+=======
+        app:layout_constraintVertical_bias="0.93"
+        app:layout_constraintWidth_percent=".42" />
+>>>>>>> Stashed changes
 
     <Button
         android:id="@+id/SingGoogle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+<<<<<<< Updated upstream
         android:backgroundTint="@color/black"
         android:drawableLeft="@drawable/google_icon"
         android:paddingTop="10dp"
@@ -65,6 +85,14 @@
         android:textAllCaps="false"
         android:textSize="17dp"
         android:textColor="@color/white"
+=======
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
+        android:text="Google"
+        android:textAllCaps="false"
+        android:textSize="17dp"
+        android:drawableLeft="@drawable/google_icon"
+>>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
@@ -78,30 +106,43 @@
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".4"
+<<<<<<< Updated upstream
         app:layout_constraintHorizontal_bias="0.4"
+=======
+        app:layout_constraintHorizontal_bias="0.0"
+>>>>>>> Stashed changes
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent="1"
         app:srcCompat="@mipmap/ic_logo_app_foreground" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textView"
+        android:id="@+id/TextField_email"
         android:layout_width="0dp"
         android:layout_height="0dp"
+<<<<<<< Updated upstream
         android:layout_marginTop="20dp"
+=======
+        android:layout_marginTop="10dp"
+>>>>>>> Stashed changes
         android:hint="Correo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
+<<<<<<< Updated upstream
         app:layout_constraintVertical_bias="0.0"
+=======
+>>>>>>> Stashed changes
         app:layout_constraintWidth_percent=".8" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textView2"
+        android:id="@+id/TextField_pass"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="Contraseña"
@@ -109,21 +150,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.019"
+=======
+        app:layout_constraintTop_toBottomOf="@+id/TextField_email"
+>>>>>>> Stashed changes
         app:layout_constraintWidth_percent=".8" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< Updated upstream
         android:text="Login and Register"
+=======
+        android:text="Login And Register"
+>>>>>>> Stashed changes
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.357" />
+=======
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+>>>>>>> Stashed changes
 
 </androidx.constraintlayout.widget.ConstraintLayout>
