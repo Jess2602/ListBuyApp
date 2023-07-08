@@ -1,72 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
-    android:background="@drawable/fondo_app"
+    android:background="@drawable/background_bottom_sheet"
+    android:orientation="vertical"
     tools:context=".NewListSheet">
 
 
     <TextView
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_list"
-        android:textSize="30sp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        style="@style/TextAppearance.AppCompat.Title"/>
+        android:layout_marginTop="20dp"
+        android:text="@string/new_list"
+        android:textSize="30sp" />
 
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/TextInputLayout.Custom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/list_icon"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/list_icon">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/listName"
-            android:inputType="text"
-            android:hint="List Name"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="List Name"
+            android:inputType="textCapSentences"
+            android:imeOptions="actionDone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/TextInputLayout.Custom2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/categories_icon"
-        android:layout_marginHorizontal="20dp">
+        app:startIconDrawable="@drawable/categories_icon">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/listCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listCategory"
-            android:inputType="text"
-            android:hint="@string/category">
+            android:hint="@string/category"
+            android:inputType="none">
 
-        </com.google.android.material.textfield.TextInputEditText>
+        </AutoCompleteTextView>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/botonbase"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Save"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/radius_button"
+        android:backgroundTint="@color/botonbase"
+        android:text="Save"
+        android:textColor="@color/black" />
 
 </LinearLayout>

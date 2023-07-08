@@ -55,9 +55,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutEmail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/TextInputLayout.Custom"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
@@ -78,7 +79,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutPass"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/TextInputLayout.Custom"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"

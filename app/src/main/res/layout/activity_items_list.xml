@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:paddingEnd="10dp"
-                    android:src="@mipmap/logo_app" />
+                    android:src="@drawable/icon_menu_vertical" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 

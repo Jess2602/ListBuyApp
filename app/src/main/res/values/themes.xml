@@ -28,4 +28,21 @@
         <item name="postSplashScreenTheme">@style/Theme.ListBuyApp</item>
     </style>
 
+    <style name="TextInputLayout.Custom" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Custom" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item> <!-- Cambia este valor según el radio deseado -->
+    </style>
+
+    <style name="TextInputLayout.Custom2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Custom2" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item> <!-- Cambia este valor según el radio deseado -->
+    </style>
 </resources>

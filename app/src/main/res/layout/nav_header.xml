@@ -14,10 +14,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@mipmap/logo_app"
-        app:civ_border_color="#FFFFFFFF"
+        app:civ_border_color="@color/black"
         app:civ_border_width="2dp"
         android:layout_marginTop="60dp"
-        app:civ_circle_background_color="#4B60DD"/>
+        app:civ_circle_background_color="@color/Fondo2"/>
 
 
     <TextView
@@ -27,7 +27,6 @@
         android:text="John Doe"
         android:textColor="@color/black"
         android:textSize="18sp"
-
         android:layout_marginTop="10dp"
         android:textStyle="bold" />
 

@@ -14,8 +14,12 @@ class itemsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityItemsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val bundle = intent.extras
+        val List = bundle?.getString("List")
+
         setSupportActionBar(binding.toolbarItemsList)
-        supportActionBar?.title = "Items List"
+        supportActionBar?.title = List.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbarItemsList.setNavigationOnClickListener {

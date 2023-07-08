@@ -41,10 +41,12 @@ class Login : AppCompatActivity() {
         session()
 
     }
+
     private fun isValidEmail(email: String): Boolean {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
         return email.matches(emailPattern.toRegex())
     }
+
     private fun session() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
@@ -220,6 +222,7 @@ class Login : AppCompatActivity() {
                             if (signInTask.isSuccessful) {
                                 val firebaseUser = FirebaseAuth.getInstance().currentUser
                                 val uid = firebaseUser?.uid ?: ""
+                                val nameusu = firebaseUser?.displayName ?: "Usuario"
 
                                 val userRef = db.collection("Users").document(account.email ?: "")
                                 userRef.get().addOnCompleteListener { task ->
@@ -228,7 +231,7 @@ class Login : AppCompatActivity() {
                                         if (document != null && document.exists()) {
                                             Toast.makeText(
                                                 applicationContext,
-                                                "Bienvenido Usuario",
+                                                "Bienvenido ${nameusu.toString()}",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         } else {

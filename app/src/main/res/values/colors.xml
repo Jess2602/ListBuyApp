@@ -12,4 +12,6 @@
     <color name="Fondo2">#472046</color>
     <color name="botonbase">#FFBC37</color>
     <color name="transparent">#00FFBC37</color>
+    <color name="placeholder_bg">#838383</color>
+    <color name="placeholder_bg2">#54AEAEAE</color>
 </resources>

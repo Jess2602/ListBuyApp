@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.listbuyapp.databinding.FragmentNewListSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import org.checkerframework.common.returnsreceiver.qual.This
 
 class NewListSheet : BottomSheetDialogFragment() {
 
@@ -30,6 +32,23 @@ class NewListSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val categoriesCollection = db.collection("Categories")
+        val listcat = ArrayList<String>()
+        categoriesCollection.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                for (document in task.result) {
+                    val documentId = document.id
+                    listcat.add(documentId)
+                }
+            } else {
+                println("Error obteniendo los documentos: ${task.exception}")
+            }
+        }
+
+        val numberAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, listcat)
+
+        binding.listCategory.setAdapter(numberAdapter)
+
         binding.saveButton.setOnClickListener {
             saveAction()
         }
@@ -57,28 +76,45 @@ class NewListSheet : BottomSheetDialogFragment() {
                         progressDialog.dismiss()
                         Toast.makeText(context, "Lista Existente", Toast.LENGTH_SHORT).show()
                     } else {
-                        val List = hashMapOf(
+                        val listData = hashMapOf(
                             "name_list" to binding.listName.text.toString(),
-                            "category" to binding.listCategory.text.toString(),
+                            "category" to binding.listCategory.text.toString()
                         )
-                        db.collection("Users").document(User?.email.toString()).collection("List")
-                            .document(binding.listName.text.toString())
-                            .set(List)
-                            .addOnSuccessListener {
-                                progressDialog.dismiss()
-                                Toast.makeText(context, "Lista Creada", Toast.LENGTH_SHORT).show()
+
+                        val categoriesCollection = db.collection("Categories")
+                        val categoryDocument = categoriesCollection.document(binding.listCategory.text.toString())
+
+                        categoryDocument.get()
+                            .addOnSuccessListener { snapshot ->
+                                if (snapshot.exists()) {
+                                    val imgUrl = snapshot.getString("img_url")
+                                    listData["img_category"] = imgUrl.toString()
+
+                                    db.collection("Users").document(User?.email.toString()).collection("List")
+                                        .document(binding.listName.text.toString())
+                                        .set(listData)
+                                        .addOnSuccessListener {
+                                            progressDialog.dismiss()
+                                            Toast.makeText(context, "Lista Creada", Toast.LENGTH_SHORT).show()
+                                        }
+                                        .addOnFailureListener {
+                                            progressDialog.dismiss()
+                                            Toast.makeText(context, "Error al Crear la Lista", Toast.LENGTH_SHORT).show()
+                                        }
+                                        .addOnCompleteListener {
+                                            progressDialog.dismiss()
+                                            cerrar()
+                                        }
+                                } else {
+                                    progressDialog.dismiss()
+                                    Toast.makeText(context, "Categoría no encontrada", Toast.LENGTH_SHORT).show()
+                                }
                             }
                             .addOnFailureListener {
                                 progressDialog.dismiss()
-                                Toast.makeText(
-                                    context,
-                                    "Error al Crear la Lista",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }.addOnCompleteListener {
-                                progressDialog.dismiss()
-                                cerrar()
+                                Toast.makeText(context, "Error al obtener la categoría", Toast.LENGTH_SHORT).show()
                             }
+
                     }
                 }
             }
