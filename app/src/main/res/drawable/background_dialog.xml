@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/Fondo2" /> <!-- Color del fondo -->
+    <corners android:radius="18dp" /> <!-- Radio del fondo -->
+</shape>

@@ -15,63 +15,12 @@
         android:outlineAmbientShadowColor="@color/black"
         android:src="@drawable/fondo_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".75"
+        app:layout_constraintHeight_percent=".65"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="1" />
 
-    <Button
-        android:id="@+id/SingUp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/black"
-        android:text="SingUp"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/SingGoogle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".08"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923"
-        app:layout_constraintWidth_percent=".45" />
-
-    <Button
-        android:id="@+id/SingIn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="15dp"
-        android:text="SingIn"
-        android:textAllCaps="false"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/SingGoogle"
-        app:layout_constraintHeight_percent=".08"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923"
-        app:layout_constraintWidth_percent=".42" />
-
-    <Button
-        android:id="@+id/SingGoogle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="@color/black"
-        android:drawableLeft="@drawable/google_icon"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="Google"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".08"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918"
-        app:layout_constraintWidth_percent=".9" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -79,7 +28,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".4"
+        app:layout_constraintHeight_percent=".35"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -87,46 +36,122 @@
         app:layout_constraintWidth_percent="1"
         app:srcCompat="@mipmap/ic_logo_app_foreground" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/TextField_email"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:hint="Correo"
+        android:layout_marginTop="20dp"
+        android:text="Login and Register"
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintWidth_percent=".9"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.066"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".9"
+        app:startIconDrawable="@drawable/icon_person">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/TextField_pass"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextField_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Correo"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutPass"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="Contraseña"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        app:endIconMode="password_toggle"
+        app:layout_constraintBottom_toTopOf="@+id/SingIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextField_email"
-        app:layout_constraintVertical_bias="0.025"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutEmail"
+        app:layout_constraintWidth_percent=".9"
+        app:startIconDrawable="@drawable/icon_lock">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Login and Register"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextField_pass"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Contraseña"
+            android:inputType="textPassword">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/SingIn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/radius_button"
+        android:backgroundTint="@color/botonbase"
+        android:text="SingIn"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHeight_percent=".08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutPass"
+        app:layout_constraintWidth_percent=".9" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/SingUp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/radius_button"
+        android:backgroundTint="@color/black"
+        android:text="SingUp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SingIn"
+        app:layout_constraintWidth_percent=".9" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/SingGoogle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_google"
+        android:drawableStart="@drawable/google_icon"
+        android:padding="10dp"
+        android:text="Google"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SingUp"
+        app:layout_constraintWidth_percent=".9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
