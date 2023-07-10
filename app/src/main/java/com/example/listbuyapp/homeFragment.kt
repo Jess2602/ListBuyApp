@@ -12,12 +12,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import android.os.Handler
-import android.widget.Toast
 
 
 class homeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var adapter: listAdapter
+    private lateinit var adapter: ListAdapter
     private lateinit var list: ArrayList<ListUser>
     private val db = Firebase.firestore
     private val user = FirebaseAuth.getInstance().currentUser
@@ -36,12 +35,14 @@ class homeFragment : Fragment() {
         binding.addListButton.setOnClickListener {
             NewListSheet().show(childFragmentManager, "newListTag")
         }
-        showRecycler()
+        showRecyclerList()
     }
 
-    private fun showRecycler() {
+    private var isFirstLoad = true
+
+    private fun showRecyclerList() {
         list = ArrayList()
-        adapter = listAdapter(list)
+        adapter = ListAdapter(list)
         binding.shimmerView.startShimmer()
         db.collection("Users").document(user?.email.toString()).collection("List")
             .addSnapshotListener { snapshot, error ->
@@ -52,23 +53,34 @@ class homeFragment : Fragment() {
 
                 if (snapshot != null) {
                     for (document in snapshot) {
-                        val wallItem = document.toObject(ListUser::class.java)
-                        wallItem.name_list = document["name_list"].toString()
-                        wallItem.category = document["category"].toString()
-                        wallItem.img_category = document["img_category"].toString()
-                        list.add(wallItem)
+                        val listItems = document.toObject(ListUser::class.java)
+                        listItems.name_list = document["name_list"].toString()
+                        listItems.id_list = document["id_list"].toString()
+                        listItems.category = document["category"].toString()
+                        listItems.img_category = document["img_category"].toString()
+                        list.add(listItems)
                     }
                     if (list.isNotEmpty()) {
                         binding.emptyTextView.visibility = View.GONE
-                        Handler().postDelayed({
-                            binding.shimmerView.stopShimmer()
-                            binding.shimmerView.visibility = View.GONE
-                            adapter.notifyDataSetChanged()
-                        }, 500)
                     } else {
                         binding.emptyTextView.visibility = View.VISIBLE
-                        binding.shimmerView.stopShimmer()
-                        binding.shimmerView.visibility = View.GONE
+                    }
+
+                    if (isFirstLoad) {
+                        if (list.isNotEmpty()) {
+                            binding.emptyTextView.visibility = View.GONE
+                            Handler().postDelayed({
+                                binding.shimmerView.stopShimmer()
+                                binding.shimmerView.visibility = View.GONE
+                                adapter.notifyDataSetChanged()
+                            }, 800)
+                        } else {
+                            binding.shimmerView.visibility = View.GONE
+                            binding.emptyTextView.visibility = View.VISIBLE
+                            adapter.notifyDataSetChanged()
+                        }
+                        isFirstLoad = false
+                    } else {
                         adapter.notifyDataSetChanged()
                     }
                 }
@@ -77,5 +89,6 @@ class homeFragment : Fragment() {
         binding.recyclerlistname.adapter = adapter
         binding.recyclerlistname.layoutManager = LinearLayoutManager(requireContext())
     }
+
 
 }

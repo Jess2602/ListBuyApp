@@ -23,7 +23,7 @@
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/Fondo1</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_logo_app_round</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_logo_app_foreground</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.ListBuyApp</item>
     </style>
@@ -41,8 +41,4 @@
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.Custom2" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">18dp</item> <!-- Cambia este valor según el radio deseado -->
-    </style>
 </resources>

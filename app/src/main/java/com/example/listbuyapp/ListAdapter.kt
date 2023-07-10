@@ -1,6 +1,7 @@
 package com.example.listbuyapp
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,59 +13,70 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class listAdapter(private var list: List<ListUser>) :
-    RecyclerView.Adapter<listAdapter.ListViewHolder>() {
+class ListAdapter(private var list: List<ListUser>) :
+    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): listAdapter.ListViewHolder {
+    ): ListAdapter.ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_layout, parent, false)
         return ListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: listAdapter.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListAdapter.ListViewHolder, position: Int) {
         val item = list[position]
         holder.nameList.text = item.name_list
         holder.category.text = item.category
         Picasso.get().load(item.img_category).into(holder.categoryImage)
         holder.editList.setOnClickListener {
-            val newListSheet = NewListSheet()
+            val editListSheet = EditListSheet()
             val bundle = Bundle()
             bundle.putString("List", item.name_list)
-            newListSheet.arguments = bundle
-            newListSheet.show((holder.itemView.context as AppCompatActivity).supportFragmentManager, "newListTag")
+            bundle.putString("Id_List", item.id_list)
+            editListSheet.arguments = bundle
+            editListSheet.show(
+                (holder.itemView.context as FragmentActivity).supportFragmentManager,
+                "editListTag"
+            )
         }
-
 
         holder.listBackground.setOnClickListener {
             val activity = it.context as AppCompatActivity
-            val intent = Intent(activity, itemsListActivity::class.java).apply {
+            val intent = Intent(activity, ItemsListActivity::class.java).apply {
                 putExtra("List", item.name_list)
+                putExtra("Id_List", item.id_list)
             }
             activity.startActivity(intent)
         }
         holder.deleteImage.setOnClickListener {
             val db = FirebaseFirestore.getInstance()
-            val User = FirebaseAuth.getInstance().currentUser
+            val user = FirebaseAuth.getInstance().currentUser
             val activity = it.context as AppCompatActivity
             val alertDialogBuilder = AlertDialog.Builder(activity)
             alertDialogBuilder.setTitle("Desea Eliminar la Lista?")
             alertDialogBuilder.setMessage("Eliminar")
             alertDialogBuilder.setPositiveButton("Si") { dialog, _ ->
-                db.collection("Users").document(User?.email.toString()).collection("List")
-                    .document(item.name_list).delete().addOnSuccessListener {
+                val progressDialog = ProgressDialog(activity)
+                progressDialog.setMessage("Eliminando Lista..")
+                progressDialog.setCancelable(false)
+                progressDialog.show()
+                progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
+                db.collection("Users").document(user?.email.toString()).collection("List")
+                    .document(item.id_list).delete().addOnSuccessListener {
                         Toast.makeText(
                             activity,
                             "Se Elimino ${item.name_list}",
                             Toast.LENGTH_SHORT
                         ).show()
+                        progressDialog.dismiss()
                     }
                     .addOnFailureListener {
                         Toast.makeText(
@@ -72,6 +84,7 @@ class listAdapter(private var list: List<ListUser>) :
                             "No se pudo eliminar ${item.name_list}",
                             Toast.LENGTH_SHORT
                         ).show()
+                        progressDialog.dismiss()
                     }
 
                 dialog.dismiss()
@@ -84,10 +97,10 @@ class listAdapter(private var list: List<ListUser>) :
             alertDialog.show()
 
             val positiveButton =
-                alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setTextColor(ContextCompat.getColor(activity, R.color.botonbase))
             val negativeButton =
-                alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
             negativeButton.setTextColor(ContextCompat.getColor(activity, R.color.botonbase))
 
             alertDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)

@@ -79,8 +79,8 @@ class Login : AppCompatActivity() {
                         val user = task.result?.user
 
                         val usersData = hashMapOf(
-                            ("name" to user?.email ?: "") as Pair<Any, Any>,
-                            ("email" to user?.uid ?: "") as Pair<Any, Any>,
+                            ("email" to user?.email ?: "") as Pair<Any, Any>,
+                            ("uid" to user?.uid ?: "") as Pair<Any, Any>,
                             "provider" to ProviderType.BASIC,
                         )
 
@@ -236,9 +236,9 @@ class Login : AppCompatActivity() {
                                             ).show()
                                         } else {
                                             val usersData = hashMapOf(
-                                                ("name" to account.email ?: "") as Pair<Any, Any>,
+                                                ("email" to account.email ?: "") as Pair<Any, Any>,
                                                 "uid" to uid,
-                                                "provider" to ProviderType.BASIC,
+                                                "provider" to ProviderType.GOOGLE,
                                             )
 
                                             db.collection("Users").document(account.email ?: "")

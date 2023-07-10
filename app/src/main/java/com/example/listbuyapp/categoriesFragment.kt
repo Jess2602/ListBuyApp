@@ -1,59 +1,79 @@
 package com.example.listbuyapp
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.listbuyapp.databinding.FragmentCategoriesBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [categoriesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class categoriesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding: FragmentCategoriesBinding
+    private lateinit var adapter: CategoriesAdapter
+    private lateinit var catgories: ArrayList<CategoriesList>
+    private val db = Firebase.firestore
+    private val user = FirebaseAuth.getInstance().currentUser
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false)
+    ): View {
+        binding = FragmentCategoriesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment categoriesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            categoriesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        showRecyclerCategories()
+
+    }
+    private var isFirstView = true
+
+    private fun showRecyclerCategories() {
+        catgories = ArrayList()
+        adapter = CategoriesAdapter(catgories)
+        binding.shimmerViewCategories.startShimmer()
+        db.collection("Categories")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                catgories.clear()
+
+                if (snapshot != null) {
+                    for (document in snapshot) {
+                        val categoriesItems = document.toObject(CategoriesList::class.java)
+                        categoriesItems.img_url = document["img_url"].toString()
+                        categoriesItems.category = document.id
+                        catgories.add(categoriesItems)
+                    }
+                    if (isFirstView) {
+                        if (catgories.isNotEmpty()) {
+                            Handler().postDelayed({
+                                binding.shimmerViewCategories.stopShimmer()
+                                binding.shimmerViewCategories.visibility = View.GONE
+                                adapter.notifyDataSetChanged()
+                            }, 800)
+                        } else {
+                            binding.shimmerViewCategories.visibility = View.GONE
+                            adapter.notifyDataSetChanged()
+                        }
+                        isFirstView = false
+                    } else {
+                        adapter.notifyDataSetChanged()
+                    }
                 }
             }
+
+        binding.recyclerCategories.adapter = adapter
+        binding.recyclerCategories.layoutManager = LinearLayoutManager(requireContext())
     }
+
+
 }

@@ -6,9 +6,10 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listbuyapp.databinding.ActivityItemsListBinding
 
-class itemsListActivity : AppCompatActivity() {
+class ItemsListActivity : AppCompatActivity() {
     lateinit var binding: ActivityItemsListBinding
-    private lateinit var adapter: itemsAdapter
+    private lateinit var itemslist: ArrayList<ItemListUser>
+    private lateinit var adapter: ItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +28,23 @@ class itemsListActivity : AppCompatActivity() {
         }
         binding.recyclerViewitemlist.layoutManager = LinearLayoutManager(this)
 
-        val nombres = listOf("Tomate", "Cebolla", "Leche") // Aquí puedes agregar tus nombres
+        recycleritems()
 
-        adapter = itemsAdapter(nombres)
+    }
+
+    private fun recycleritems(){
+        adapter = ItemsAdapter(cargarlista())
         binding.recyclerViewitemlist.adapter = adapter
+        binding.recyclerViewitemlist.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun cargarlista () : MutableList<ItemListUser>{
+        val listItems = mutableListOf<ItemListUser>()
+        listItems.add(ItemListUser("asasas","Tomate","150","2",false))
+        listItems.add(ItemListUser("asasas","Cebolla","250","7",false))
+        listItems.add(ItemListUser("asasas","Leche","400","4",false))
+        listItems.add(ItemListUser("asasas","Refresco","25","2",false))
+        return listItems
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

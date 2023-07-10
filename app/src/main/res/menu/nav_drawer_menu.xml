@@ -10,15 +10,15 @@
             android:icon="@drawable/home_icon"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/history"
-            android:checkable="true"
-            android:icon="@drawable/history_icon"
-            android:title="@string/menu_history" />
-        <item
             android:id="@+id/categories"
             android:checkable="true"
             android:icon="@drawable/categories_icon"
             android:title="@string/menu_categories" />
+        <item
+            android:id="@+id/history"
+            android:checkable="true"
+            android:icon="@drawable/history_icon"
+            android:title="@string/menu_history" />
     </group>
 
 

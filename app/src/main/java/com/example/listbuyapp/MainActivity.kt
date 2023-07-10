@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity() {
 
             when (item.itemId) {
                 R.id.home -> replaceFragment(homeFragment(), item.title.toString())
-                R.id.history -> replaceFragment(historyFragment(), item.title.toString())
                 R.id.categories -> replaceFragment(categoriesFragment(), item.title.toString())
+                R.id.history -> replaceFragment(historyFragment(), item.title.toString())
                 R.id.logOut -> {
 
 
@@ -92,9 +92,11 @@ class MainActivity : AppCompatActivity() {
                     val alertDialog = alertDialogBuilder.create()
                     alertDialog.show()
 
-                    val positiveButton = alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                    val positiveButton =
+                        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
                     positiveButton.setTextColor(ContextCompat.getColor(this, R.color.botonbase))
-                    val negativeButton = alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
+                    val negativeButton =
+                        alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)
                     negativeButton.setTextColor(ContextCompat.getColor(this, R.color.botonbase))
 
                     alertDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
