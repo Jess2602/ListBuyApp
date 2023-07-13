@@ -15,7 +15,7 @@
             android:layout_weight="2.5"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="12dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/categoryImage"
@@ -51,15 +51,14 @@
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/textViewAmount"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:gravity="left|top|start"
-                android:text="0/0"
-                android:textColor="@color/Fondo1"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_height="8dp"
+                android:progress="70"
+                android:progressBackgroundTint="#B9888888"
+                android:progressTint="#245ED3"/>
 
 
         </LinearLayout>
