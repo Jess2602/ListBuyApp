@@ -18,6 +18,10 @@ class ItemsListActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         val List = bundle?.getString("List")
+        val Id_list = bundle?.getString("Id_List")
+        binding.addNewItemButton.setOnClickListener {
+            NewItemSheet().show(supportFragmentManager, "newItemTag")
+        }
 
         setSupportActionBar(binding.toolbarItemsList)
         supportActionBar?.title = List.toString()
@@ -32,18 +36,16 @@ class ItemsListActivity : AppCompatActivity() {
 
     }
 
-    private fun recycleritems(){
+    private fun recycleritems() {
         adapter = ItemsAdapter(cargarlista())
         binding.recyclerViewitemlist.adapter = adapter
         binding.recyclerViewitemlist.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun cargarlista () : MutableList<ItemListUser>{
+    private fun cargarlista(): MutableList<ItemListUser> {
         val listItems = mutableListOf<ItemListUser>()
-        listItems.add(ItemListUser("asasas","Tomate","150","2",false))
-        listItems.add(ItemListUser("asasas","Cebolla","250","7",false))
-        listItems.add(ItemListUser("asasas","Leche","400","4",false))
-        listItems.add(ItemListUser("asasas","Refresco","25","2",false))
+        listItems.add(ItemListUser("asasas", "te amo", "Tomate", 150.0, 2, false))
+
         return listItems
     }
 

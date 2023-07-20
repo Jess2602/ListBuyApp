@@ -17,4 +17,9 @@
     <string name="category">Category</string>
     <string name="listcategory">listCategory</string>
     <string name="prefs_file">com.example.listbuyapp.FILE_KEY</string>
+    <string name="add_new_item">Add new item</string>
+    <string name="item_name">Item Name</string>
+    <string name="save">Save</string>
+    <string name="price">Price</string>
+    <string name="amount">Amount</string>
 </resources>

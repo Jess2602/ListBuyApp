@@ -17,7 +17,7 @@ class NewListSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentNewListSheetBinding
     private val db = Firebase.firestore
-    private val User = FirebaseAuth.getInstance().currentUser
+    private val user = FirebaseAuth.getInstance().currentUser
 
 
     override fun onCreateView(
@@ -67,7 +67,7 @@ class NewListSheet : BottomSheetDialogFragment() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
-            val listRef = db.collection("Users").document(User?.email.toString()).collection("List")
+            val listRef = db.collection("Users").document(user?.email.toString()).collection("List")
                 .whereEqualTo("name_list", binding.listName.text.toString())
             listRef.get()
                 .addOnSuccessListener { querySnapshot ->
@@ -80,7 +80,7 @@ class NewListSheet : BottomSheetDialogFragment() {
                             .addOnSuccessListener { snapshot ->
                                 if (snapshot.exists()) {
                                     val listCollection = db.collection("Users")
-                                        .document(User?.email.toString())
+                                        .document(user?.email.toString())
                                         .collection("List")
 
                                     val newListDocument = listCollection.document()

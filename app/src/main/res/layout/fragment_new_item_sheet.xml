@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_bottom_sheet"
+    android:orientation="vertical"
+    tools:context=".NewItemSheet">
+
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_new_item"
+        android:textSize="30sp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/TextInputLayout.Custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/item_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/item_name"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/TextInputLayout.Custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/price_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/price"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/TextInputLayout.Custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/amount_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amount_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/amount"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveNewItemButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/radius_button"
+        android:backgroundTint="@color/botonbase"
+        android:text="@string/save"
+        android:textColor="@color/black" />
+
+</LinearLayout>

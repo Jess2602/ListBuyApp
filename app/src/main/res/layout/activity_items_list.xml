@@ -166,7 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/addListButton"
+            android:id="@+id/addNewItemButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/button_agregar" />

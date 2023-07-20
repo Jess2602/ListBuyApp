@@ -1,5 +1,6 @@
 package com.example.listbuyapp
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
@@ -27,7 +29,7 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
     override fun onBindViewHolder(holderitem: ItemViewHolder, position: Int) {
         val item = items[position]
         holderitem.itemName.text = item.name_item
-        holderitem.amount.text = item.amount_item
+        holderitem.amount.text = item.amount_item.toString()
 
         holderitem.checkedlottie.setOnClickListener {
             if (!item.checked_item) {

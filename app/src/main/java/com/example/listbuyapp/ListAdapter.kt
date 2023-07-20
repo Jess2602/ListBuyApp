@@ -51,8 +51,10 @@ class ListAdapter(private var list: List<ListUser>) :
         holder.listBackground.setOnClickListener {
             val activity = it.context as AppCompatActivity
             val intent = Intent(activity, ItemsListActivity::class.java).apply {
-                putExtra("List", item.name_list)
-                putExtra("Id_List", item.id_list)
+                val bundle = Bundle()
+                bundle.putString("List", item.name_list)
+                bundle.putString("Id_List", item.id_list)
+                putExtras(bundle)
             }
             activity.startActivity(intent)
         }
