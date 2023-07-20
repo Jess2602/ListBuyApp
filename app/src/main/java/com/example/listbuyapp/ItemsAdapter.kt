@@ -38,7 +38,7 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
         holderitem.amount.text = item.amount_item.toString()
 
         if (!item.checked_item) {
-            // Código para cuando checked_item es false
+            holderitem.checkedlottie.progress = 0f;
             holderitem.checkedlottie.setOnClickListener {
                 val db = FirebaseFirestore.getInstance()
                 val user = FirebaseAuth.getInstance().currentUser
@@ -53,18 +53,16 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
                     "checked_item" to true,
                 )
                 ItemListUserCollection.update(newData as Map<String, Any>).addOnSuccessListener {
-
-                }
-                    .addOnFailureListener { exception ->
-
+                }.addOnFailureListener { exception ->
+                        Toast.makeText(
+                            activity,
+                            "Error en ${exception}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
-            holderitem.checkedlottie.progress =
-                0f; // Establecer el progreso en 0 para que la animación inicie desde el principio
-
-
         } else {
-            // Código para cuando checked_item es true
+            holderitem.checkedlottie.progress = 1f;
             holderitem.checkedlottie.setOnClickListener {
                 val db = FirebaseFirestore.getInstance()
                 val user = FirebaseAuth.getInstance().currentUser
@@ -78,17 +76,16 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
                 val newData = hashMapOf(
                     "checked_item" to false,
                 )
-                ItemListUserCollection.update(newData as Map<String, Any>).addOnSuccessListener {
-
-                }
-                    .addOnFailureListener { exception ->
-
+                ItemListUserCollection.update(newData as Map<String, Any>)
+                    .addOnSuccessListener {
+                    }.addOnFailureListener { exception ->
+                        Toast.makeText(
+                            activity,
+                            "Error en ${exception}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
-            holderitem.checkedlottie.progress =
-                1f; // Establecer el progreso en 1 para que la animación muestre su estado final
-
-
         }
 
 

@@ -47,10 +47,10 @@
                 android:id="@+id/progressBaritems"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="15dp"
                 android:layout_marginHorizontal="12dp"
                 android:progressBackgroundTint="@color/placeholder_bg2"
-                android:progressTint="#245ED3" />
+                android:progressTint="#4CAF50" />
         </LinearLayout>
 
         <LinearLayout

@@ -67,7 +67,7 @@ class ListAdapter(private var list: List<ListUser>) :
                 val totalItems = checkedCount + uncheckedCount
                 val progress = (checkedCount.toDouble() / totalItems.toDouble()) * 100
                 holder.progress.progress = progress.toInt()
-
+                holder.amountItems.text = "$checkedCount/$totalItems"
             }
         }
 
@@ -156,6 +156,7 @@ class ListAdapter(private var list: List<ListUser>) :
     class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameList: TextView = view.findViewById(R.id.textNameList)
         val category: TextView = view.findViewById(R.id.textViewCategory)
+        val amountItems: TextView = view.findViewById(R.id.textViewAmountItems)
         val categoryImage: CircleImageView = view.findViewById(R.id.categoryImage)
         val deleteImage: ImageView = view.findViewById(R.id.deleteList)
         val editList: ImageView = view.findViewById(R.id.editList)
