@@ -2,14 +2,21 @@ package com.example.listbuyapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listbuyapp.databinding.ActivityItemsListBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ItemsListActivity : AppCompatActivity() {
     lateinit var binding: ActivityItemsListBinding
     private lateinit var itemslist: ArrayList<ItemListUser>
     private lateinit var adapter: ItemsAdapter
+    private val db = Firebase.firestore
+    private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,23 +44,7 @@ class ItemsListActivity : AppCompatActivity() {
         binding.toolbarItemsList.setNavigationOnClickListener {
             finish()
         }
-        binding.recyclerViewitemlist.layoutManager = LinearLayoutManager(this)
-
-        recycleritems()
-
-    }
-
-    private fun recycleritems() {
-        adapter = ItemsAdapter(cargarlista())
-        binding.recyclerViewitemlist.adapter = adapter
-        binding.recyclerViewitemlist.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun cargarlista(): MutableList<ItemListUser> {
-        val listItems = mutableListOf<ItemListUser>()
-        listItems.add(ItemListUser("asasas", "te amo", "Tomate", 150.0, 2, false))
-
-        return listItems
+        showRecyclerItemsList(List.toString(), Id_list.toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -63,4 +54,40 @@ class ItemsListActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun showRecyclerItemsList(list: String, id_list: String) {
+        itemslist = ArrayList()
+        adapter = ItemsAdapter(itemslist)
+
+        db.collection("Users").document(user?.email.toString()).collection("List")
+            .document(id_list).collection("ItemListUser")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                itemslist.clear()
+
+                if (snapshot != null) {
+                    for (document in snapshot) {
+                        val listItems = document.toObject(ItemListUser::class.java)
+                        listItems.name_item = document["name_item"].toString()
+                        listItems.id_item = document["id_item"].toString()
+                        listItems.id_list = document["id_list"].toString()
+                        listItems.price_item = document["price_item"].toString().toDouble()
+                        listItems.amount_item = document["amount_item"].toString().toInt()
+                        listItems.checked_item = document["checked_item"].toString().toBoolean()
+                        itemslist.add(listItems)
+                    }
+                    adapter.notifyDataSetChanged()
+                } else {
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+
+        binding.recyclerViewitemlist.adapter = adapter
+        binding.recyclerViewitemlist.layoutManager = LinearLayoutManager(this)
+
+    }
 }
+
