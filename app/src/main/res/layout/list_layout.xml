@@ -52,11 +52,10 @@
                 android:textSize="15sp" />
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/progressBarItemsList"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:progress="70"
                 android:progressBackgroundTint="#B9888888"
                 android:progressTint="#245ED3"/>
 

@@ -1,5 +1,7 @@
 package com.example.listbuyapp
 
+import android.animation.Animator
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -29,22 +31,68 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
         return ItemViewHolder(itemView)
     }
 
+    @SuppressLint("Range")
     override fun onBindViewHolder(holderitem: ItemViewHolder, position: Int) {
         val item = items[position]
         holderitem.itemName.text = item.name_item
         holderitem.amount.text = item.amount_item.toString()
 
-        holderitem.checkedlottie.setOnClickListener {
-            if (!item.checked_item) {
-                holderitem.checkedlottie.speed = 2f;
-                holderitem.checkedlottie.playAnimation();
-                item.checked_item = true;
-            } else {
-                holderitem.checkedlottie.speed = -2f;
-                holderitem.checkedlottie.playAnimation();
-                item.checked_item = false;
+        if (!item.checked_item) {
+            // Código para cuando checked_item es false
+            holderitem.checkedlottie.setOnClickListener {
+                val db = FirebaseFirestore.getInstance()
+                val user = FirebaseAuth.getInstance().currentUser
+                val activity = it.context as AppCompatActivity
+                val ItemListUserCollection = db.collection("Users")
+                    .document(user?.email.toString())
+                    .collection("List")
+                    .document(item.id_list)
+                    .collection("ItemListUser").document(item.id_item)
+
+                val newData = hashMapOf(
+                    "checked_item" to true,
+                )
+                ItemListUserCollection.update(newData as Map<String, Any>).addOnSuccessListener {
+
+                }
+                    .addOnFailureListener { exception ->
+
+                    }
             }
+            holderitem.checkedlottie.progress =
+                0f; // Establecer el progreso en 0 para que la animación inicie desde el principio
+
+
+        } else {
+            // Código para cuando checked_item es true
+            holderitem.checkedlottie.setOnClickListener {
+                val db = FirebaseFirestore.getInstance()
+                val user = FirebaseAuth.getInstance().currentUser
+                val activity = it.context as AppCompatActivity
+                val ItemListUserCollection = db.collection("Users")
+                    .document(user?.email.toString())
+                    .collection("List")
+                    .document(item.id_list)
+                    .collection("ItemListUser").document(item.id_item)
+
+                val newData = hashMapOf(
+                    "checked_item" to false,
+                )
+                ItemListUserCollection.update(newData as Map<String, Any>).addOnSuccessListener {
+
+                }
+                    .addOnFailureListener { exception ->
+
+                    }
+            }
+            holderitem.checkedlottie.progress =
+                1f; // Establecer el progreso en 1 para que la animación muestre su estado final
+
+
         }
+
+
+
 
         holderitem.backgroundItems.setOnClickListener {
             val db = FirebaseFirestore.getInstance()
@@ -71,7 +119,8 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
                 progressDialog.show()
                 progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
                 db.collection("Users").document(user?.email.toString()).collection("List")
-                    .document(item.id_list).collection("ItemListUser").document(item.id_item).delete()
+                    .document(item.id_list).collection("ItemListUser").document(item.id_item)
+                    .delete()
                     .addOnSuccessListener {
                         Toast.makeText(
                             activity,

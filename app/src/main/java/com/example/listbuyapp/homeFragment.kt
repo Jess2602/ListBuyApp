@@ -83,6 +83,8 @@ class homeFragment : Fragment() {
                     } else {
                         adapter.notifyDataSetChanged()
                     }
+                } else {
+                    adapter.notifyDataSetChanged()
                 }
             }
 

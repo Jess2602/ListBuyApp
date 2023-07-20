@@ -2,7 +2,6 @@ package com.example.listbuyapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,7 @@ class ItemsListActivity : AppCompatActivity() {
     private lateinit var adapter: ItemsAdapter
     private val db = Firebase.firestore
     private val user = FirebaseAuth.getInstance().currentUser
+    private val totalItems: Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +44,59 @@ class ItemsListActivity : AppCompatActivity() {
         binding.toolbarItemsList.setNavigationOnClickListener {
             finish()
         }
+
+        val collectionRef = db.collection("Users").document(user?.email.toString())
+            .collection("List").document(Id_list.toString()).collection("ItemListUser")
+
+        collectionRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                return@addSnapshotListener
+            }
+            if (snapshot != null) {
+                var checkedCount = 0
+                var totalPrice = 0.0
+                var totalPriceChecked = 0.0
+                var uncheckedCount = 0
+
+                for (document in snapshot.documents) {
+                    val subtotalItems = document.getDouble("price_item") ?: 0.0 // Precio individual de un ítem
+                    val cantidadItems = document.getDouble("amount_item") ?: 0.0 // Cantidad de ítems
+                    val checked = document.getBoolean("checked_item") ?: false
+
+                    if (checked) {
+                        checkedCount++
+                        val totalItems = subtotalItems * cantidadItems
+                        totalPriceChecked += totalItems
+                    } else {
+                        uncheckedCount++
+                    }
+
+                    totalPrice += subtotalItems * cantidadItems
+                }
+
+                // Aquí tienes los totales con la multiplicación de la cantidad
+                // También tienes el precio total de todos los elementos (totalPrice)
+                // Y el precio total de los elementos marcados (totalPriceChecked)
+
+                // Ejemplo: Actualizar el ProgressBar
+                val totalItems = checkedCount + uncheckedCount
+                val progress = (checkedCount.toDouble() / totalItems.toDouble()) * 100
+                binding.progressBaritems.progress = progress.toInt()
+
+
+                // Ejemplo: Mostrar los totales en TextViews
+                binding.itemsMax.text = "$checkedCount/$totalItems"
+                binding.totalPrice.text = "MX$$totalPrice"
+                binding.totalPriceChecked.text = "MX$$totalPriceChecked"
+
+
+            } else {
+                adapter.notifyDataSetChanged()
+            }
+
+        }
+
+
         showRecyclerItemsList(List.toString(), Id_list.toString())
     }
 
@@ -78,7 +131,13 @@ class ItemsListActivity : AppCompatActivity() {
                         listItems.checked_item = document["checked_item"].toString().toBoolean()
                         itemslist.add(listItems)
                     }
-                    adapter.notifyDataSetChanged()
+                    if (itemslist.isNotEmpty()) {
+                        binding.emptyTextViewItem.visibility = View.GONE
+                        adapter.notifyDataSetChanged()
+                    } else {
+                        binding.emptyTextViewItem.visibility = View.VISIBLE
+                        adapter.notifyDataSetChanged()
+                    }
                 } else {
                     adapter.notifyDataSetChanged()
                 }

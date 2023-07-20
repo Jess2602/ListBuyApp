@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,43 @@ class ListAdapter(private var list: List<ListUser>) :
         holder.nameList.text = item.name_list
         holder.category.text = item.category
         Picasso.get().load(item.img_category).into(holder.categoryImage)
+        val db = FirebaseFirestore.getInstance()
+        val user = FirebaseAuth.getInstance().currentUser
+
+        val collectionRef = db.collection("Users").document(user?.email.toString())
+            .collection("List").document(item.id_list).collection("ItemListUser")
+
+        collectionRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                return@addSnapshotListener
+            }
+            if (snapshot != null) {
+                var checkedCount = 0
+
+                var uncheckedCount = 0
+
+                for (document in snapshot.documents) {
+
+                    val checked = document.getBoolean("checked_item") ?: false
+
+                    if (checked) {
+                        checkedCount++
+
+                    } else {
+                        uncheckedCount++
+                    }
+
+                }
+                val totalItems = checkedCount + uncheckedCount
+                val progress = (checkedCount.toDouble() / totalItems.toDouble()) * 100
+                holder.progress.progress = progress.toInt()
+
+            }
+        }
+
+
+
+
         holder.editList.setOnClickListener {
             val editListSheet = EditListSheet()
             val bundle = Bundle()
@@ -122,5 +160,6 @@ class ListAdapter(private var list: List<ListUser>) :
         val deleteImage: ImageView = view.findViewById(R.id.deleteList)
         val editList: ImageView = view.findViewById(R.id.editList)
         val listBackground: LinearLayout = view.findViewById(R.id.backgroundList)
+        val progress: ProgressBar = view.findViewById(R.id.progressBarItemsList)
     }
 }

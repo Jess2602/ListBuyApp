@@ -8,6 +8,7 @@
     tools:context=".ItemsListActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -24,8 +25,8 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbarItemsList"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="5dp"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginBottom="5dp"
                 android:background="@color/Fondo1"
                 android:elevation="0dp"
                 app:contentInsetLeft="0dp"
@@ -43,12 +44,11 @@
             </com.google.android.material.appbar.MaterialToolbar>
 
             <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_marginHorizontal="12dp"
+                android:id="@+id/progressBaritems"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:progress="70"
+                android:layout_marginHorizontal="12dp"
                 android:progressBackgroundTint="@color/placeholder_bg2"
                 android:progressTint="#245ED3" />
         </LinearLayout>
@@ -80,12 +80,12 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/totalPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="MX$600"
-                    android:textColor="@color/white"
-                  />
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,22 +105,23 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/totalPriceChecked"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="MX$600"
-                    android:textColor="@color/white"
-                  />
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -130,12 +131,12 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/items_max"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="3/5"
-                    android:textColor="@color/white"
-             />
+                    android:textColor="@color/white" />
             </LinearLayout>
 
 
@@ -157,7 +158,53 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/emptyTextViewItem"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/zanahoria" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What do you need to buy?"
+            android:textSize="22dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tap the button to create your list"
+            android:textAlignment="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </LinearLayout>
     <FrameLayout
         android:layout_width="65dp"
         android:layout_height="65dp"
