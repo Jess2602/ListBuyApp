@@ -20,7 +20,14 @@ class ItemsListActivity : AppCompatActivity() {
         val List = bundle?.getString("List")
         val Id_list = bundle?.getString("Id_List")
         binding.addNewItemButton.setOnClickListener {
-            NewItemSheet().show(supportFragmentManager, "newItemTag")
+            val newItemSheet = NewItemSheet()
+
+            val bundle = Bundle()
+            bundle.putString("List", List)
+            bundle.putString("Id_List", Id_list)
+
+            newItemSheet.arguments = bundle
+            newItemSheet.show(supportFragmentManager, "newItemTag")
         }
 
         setSupportActionBar(binding.toolbarItemsList)

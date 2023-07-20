@@ -1,5 +1,6 @@
 package com.example.listbuyapp
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -49,51 +50,85 @@ class NewItemSheet : BottomSheetDialogFragment() {
     }
 
     private fun saveNewItemAction(list: String, id_List: String) {
-        if (binding.nameItem.text.toString()
+        if (
+            binding.nameItem.text.toString()
                 .isNotEmpty() && binding.amountItem.text.toString()
                 .isNotEmpty() && binding.priceItem.text.toString()
                 .isNotEmpty()
         ) {
-            val ItemListUserCollection = db.collection("Users")
-                .document(user?.email.toString())
-                .collection("List")
-                .document(list)
-                .collection("ItemListUser")
+            val progressDialog = ProgressDialog(context)
+            progressDialog.setMessage("Guardando Item...")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+            progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
+
+            val listRef = db.collection("Users").document(user?.email.toString()).collection("List")
+                .document(id_List).collection("ItemListUser")
+                .whereEqualTo("name_item", binding.nameItem.text.toString())
+            listRef.get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot.isEmpty) {
+                        val ItemListUserCollection = db.collection("Users")
+                            .document(user?.email.toString())
+                            .collection("List")
+                            .document(id_List)
+                            .collection("ItemListUser")
 
 
-            val itemListUserDocument = ItemListUserCollection.document()
-            val newItemListUserId = itemListUserDocument.id
+                        val itemListUserDocument = ItemListUserCollection.document()
+                        val newItemListUserId = itemListUserDocument.id
 
-            val listData = hashMapOf(
-                "name_item" to binding.nameItem.text.toString(),
-                "price_item" to binding.priceItem.text.toString(),
-                "amount_item" to binding.amountItem.text.toString(),
-                "checked_item" to false,
-                "id_list" to list,
-                "id_item" to newItemListUserId
-            )
-            ItemListUserCollection.document(newItemListUserId)
-                .set(listData)
-                .addOnSuccessListener {
+                        val priceItem = binding.priceItem.text.toString().toDoubleOrNull() ?: 0.0
+                        val amountItem = binding.amountItem.text.toString().toIntOrNull() ?: 0
 
-                    Toast.makeText(
-                        context,
-                        "Item creado",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    close()
+                        val listData = hashMapOf(
+                            "name_item" to binding.nameItem.text.toString(),
+                            "price_item" to priceItem,
+                            "amount_item" to amountItem,
+                            "checked_item" to false,
+                            "id_list" to id_List,
+                            "id_item" to newItemListUserId
+                        )
+                        ItemListUserCollection.document(newItemListUserId)
+                            .set(listData)
+                            .addOnSuccessListener {
+                                progressDialog.dismiss()
+                                Toast.makeText(
+                                    context,
+                                    "Item creado",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                close()
+                            }
+                            .addOnFailureListener { exception ->
+                                progressDialog.dismiss()
+                                Toast.makeText(
+                                    context,
+                                    "Error al crear item ${exception.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                close()
+                            }
+                    } else {
+                        progressDialog.dismiss()
+                        Toast.makeText(
+
+                            context,
+                            "El item ya Existe",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
                 }
                 .addOnFailureListener { exception ->
-
+                    progressDialog.dismiss()
                     Toast.makeText(
                         context,
-                        "Error al crear item ${exception.message}",
+                        "Error al consultar la colección: ${exception.message}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    close()
                 }
-        }
-        else{
+        } else {
             Toast.makeText(
                 context,
                 "No se han rellenado todos los datos",

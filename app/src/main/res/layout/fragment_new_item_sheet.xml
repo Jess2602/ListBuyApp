@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/item_name"
-            android:imeOptions="actionDone"
+
             android:inputType="textCapSentences" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
+        android:inputType="numberDecimal"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/price_icon">
 
@@ -52,8 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/price"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences" />
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
+        android:inputType="number"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/amount_icon">
 
@@ -72,10 +74,9 @@
             android:layout_height="match_parent"
             android:hint="@string/amount"
             android:imeOptions="actionDone"
-            android:inputType="textCapSentences" />
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
     <androidx.appcompat.widget.AppCompatButton
