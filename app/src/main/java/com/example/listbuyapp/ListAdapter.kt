@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ListAdapter(private var list: List<ListUser>) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
@@ -113,8 +115,12 @@ class ListAdapter(private var list: List<ListUser>) :
                 progressDialog.show()
                 progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
 
+                val currentTime = Date()
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                val formattedDate = dateFormat.format(currentTime)
+
                 mHistoryViewModel = ViewModelProvider(activity)[HistoryViewModel::class.java]
-                val history = History(0, item.name_list, item.category, "Fecha")
+                val history = History(0, item.name_list, item.category, formattedDate)
                 mHistoryViewModel.addHistory(history)
 
                 db.collection("Users").document(user?.email.toString()).collection("List")

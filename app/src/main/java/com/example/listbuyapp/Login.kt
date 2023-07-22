@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import com.example.listbuyapp.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
@@ -87,18 +89,61 @@ class Login : AppCompatActivity() {
                         db.collection("Users").document(user?.email ?: "")
                             .set(usersData)
                             .addOnSuccessListener {
-                                Toast.makeText(
+
+                                val rootView = findViewById<View>(android.R.id.content)
+                                val snackbar = Snackbar.make(
+                                    rootView,
+                                    "¿Qué acción desea realizar?",
+                                    Snackbar.LENGTH_LONG
+                                )
+
+                                snackbar.setTextColor(
+                                    ContextCompat.getColor(
+                                        applicationContext,
+                                        R.color.black
+                                    )
+                                )
+                                snackbar.setBackgroundTint(
+                                    ContextCompat.getColor(
+                                        applicationContext,
+                                        R.color.botonbase
+                                    )
+                                )
+                                val drawableFondo = ContextCompat.getDrawable(
                                     applicationContext,
-                                    "Cuenta Creada",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                    R.drawable.background_dialog
+                                )
+                                snackbar.view.background = drawableFondo
+                                snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                snackbar.show()
                             }
                             .addOnFailureListener {
-                                Toast.makeText(
-                                    applicationContext,
+                                val rootView = findViewById<View>(android.R.id.content)
+                                val snackbar = Snackbar.make(
+                                    rootView,
                                     "No se Guardaron los Datos Correctamente",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                    Snackbar.LENGTH_LONG
+                                )
+
+                                snackbar.setTextColor(
+                                    ContextCompat.getColor(
+                                        applicationContext,
+                                        R.color.black
+                                    )
+                                )
+                                snackbar.setBackgroundTint(
+                                    ContextCompat.getColor(
+                                        applicationContext,
+                                        R.color.botonbase
+                                    )
+                                )
+                                val drawableFondo = ContextCompat.getDrawable(
+                                    applicationContext,
+                                    R.drawable.background_dialog
+                                )
+                                snackbar.view.background = drawableFondo
+                                snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                snackbar.show()
                             }
 
                         showHome(user?.email ?: "", user?.uid ?: "", ProviderType.BASIC)
@@ -171,31 +216,61 @@ class Login : AppCompatActivity() {
     }
 
     private fun showAlert() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Se ha Producido un error autenticando el Usuario")
-        builder.setPositiveButton("Aceptar") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-        val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-        positiveButton.setTextColor(ContextCompat.getColor(this, R.color.botonbase))
-        dialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
+        val rootView = findViewById<View>(android.R.id.content)
+        val snackbar = Snackbar.make(
+            rootView,
+            "Error autenticando el Usuario",
+            Snackbar.LENGTH_LONG
+        )
+
+        snackbar.setTextColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.black
+            )
+        )
+        snackbar.setBackgroundTint(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.botonbase
+            )
+        )
+        val drawableFondo = ContextCompat.getDrawable(
+            applicationContext,
+            R.drawable.background_dialog
+        )
+        snackbar.view.background = drawableFondo
+        snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        snackbar.show()
     }
 
     private fun showAlertEmpty() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Los Campos están Vacíos")
-        builder.setPositiveButton("Aceptar") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-        val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-        positiveButton.setTextColor(ContextCompat.getColor(this, R.color.botonbase))
-        dialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
+        val rootView = findViewById<View>(android.R.id.content)
+        val snackbar = Snackbar.make(
+            rootView,
+            "Campos Vacios",
+            Snackbar.LENGTH_LONG
+        )
+
+        snackbar.setTextColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.black
+            )
+        )
+        snackbar.setBackgroundTint(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.botonbase
+            )
+        )
+        val drawableFondo = ContextCompat.getDrawable(
+            applicationContext,
+            R.drawable.background_dialog
+        )
+        snackbar.view.background = drawableFondo
+        snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        snackbar.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
