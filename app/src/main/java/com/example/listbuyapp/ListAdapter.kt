@@ -15,7 +15,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.listbuyapp.data.History
+import com.example.listbuyapp.data.HistoryViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
@@ -23,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class ListAdapter(private var list: List<ListUser>) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
-
+    private lateinit var mHistoryViewModel: HistoryViewModel
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -72,9 +75,7 @@ class ListAdapter(private var list: List<ListUser>) :
         }
 
 
-
-
-        holder.editList.setOnClickListener {
+        holder.listBackground.setOnLongClickListener {
             val editListSheet = EditListSheet()
             val bundle = Bundle()
             bundle.putString("List", item.name_list)
@@ -84,7 +85,8 @@ class ListAdapter(private var list: List<ListUser>) :
                 (holder.itemView.context as FragmentActivity).supportFragmentManager,
                 "editListTag"
             )
-        }
+       true
+       }
 
         holder.listBackground.setOnClickListener {
             val activity = it.context as AppCompatActivity
@@ -96,6 +98,7 @@ class ListAdapter(private var list: List<ListUser>) :
             }
             activity.startActivity(intent)
         }
+
         holder.deleteImage.setOnClickListener {
             val db = FirebaseFirestore.getInstance()
             val user = FirebaseAuth.getInstance().currentUser
@@ -109,6 +112,11 @@ class ListAdapter(private var list: List<ListUser>) :
                 progressDialog.setCancelable(false)
                 progressDialog.show()
                 progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
+
+                mHistoryViewModel = ViewModelProvider(activity)[HistoryViewModel::class.java]
+                val history = History(0, item.name_list, item.category, "Fecha")
+                mHistoryViewModel.addHistory(history)
+
                 db.collection("Users").document(user?.email.toString()).collection("List")
                     .document(item.id_list).delete().addOnSuccessListener {
                         Toast.makeText(
@@ -159,7 +167,6 @@ class ListAdapter(private var list: List<ListUser>) :
         val amountItems: TextView = view.findViewById(R.id.textViewAmountItems)
         val categoryImage: CircleImageView = view.findViewById(R.id.categoryImage)
         val deleteImage: ImageView = view.findViewById(R.id.deleteList)
-        val editList: ImageView = view.findViewById(R.id.editList)
         val listBackground: LinearLayout = view.findViewById(R.id.backgroundList)
         val progress: ProgressBar = view.findViewById(R.id.progressBarItemsList)
     }
