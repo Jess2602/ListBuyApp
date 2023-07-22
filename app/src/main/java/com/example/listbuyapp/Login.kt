@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -219,20 +220,21 @@ class Login : AppCompatActivity() {
         val rootView = findViewById<View>(android.R.id.content)
         val snackbar = Snackbar.make(
             rootView,
-            "Error autenticando el Usuario",
+            Html.fromHtml("<b>Error Autenticando el Usuario</b>"),
             Snackbar.LENGTH_LONG
         )
+
 
         snackbar.setTextColor(
             ContextCompat.getColor(
                 applicationContext,
-                R.color.black
+                R.color.white
             )
         )
         snackbar.setBackgroundTint(
             ContextCompat.getColor(
                 applicationContext,
-                R.color.botonbase
+                R.color.error
             )
         )
         val drawableFondo = ContextCompat.getDrawable(

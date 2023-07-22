@@ -11,6 +11,8 @@
     <color name="Fondo1">#362436</color>
     <color name="Fondo2">#472046</color>
     <color name="botonbase">#FFBC37</color>
+    <color name="error">#E91E47</color>
+    <color name="crear">#47B64B</color>
     <color name="itembase">#C59232</color>
     <color name="transparent">#00FFBC37</color>
     <color name="placeholder_bg">#838383</color>

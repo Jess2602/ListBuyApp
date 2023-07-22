@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listbuyapp.databinding.ActivityItemsListBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -59,8 +60,10 @@ class ItemsListActivity : AppCompatActivity() {
                 var uncheckedCount = 0
 
                 for (document in snapshot.documents) {
-                    val subtotalItems = document.getDouble("price_item") ?: 0.0 // Precio individual de un ítem
-                    val cantidadItems = document.getDouble("amount_item") ?: 0.0 // Cantidad de ítems
+                    val subtotalItems =
+                        document.getDouble("price_item") ?: 0.0 // Precio individual de un ítem
+                    val cantidadItems =
+                        document.getDouble("amount_item") ?: 0.0 // Cantidad de ítems
                     val checked = document.getBoolean("checked_item") ?: false
 
                     if (checked) {
@@ -114,6 +117,7 @@ class ItemsListActivity : AppCompatActivity() {
 
         db.collection("Users").document(user?.email.toString()).collection("List")
             .document(id_list).collection("ItemListUser")
+            .orderBy("checked_item", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     return@addSnapshotListener

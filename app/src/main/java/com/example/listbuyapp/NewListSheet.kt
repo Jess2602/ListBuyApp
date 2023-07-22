@@ -2,13 +2,16 @@ package com.example.listbuyapp
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.listbuyapp.databinding.FragmentNewListSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -99,11 +102,33 @@ class NewListSheet : BottomSheetDialogFragment() {
                                         .set(listData)
                                         .addOnSuccessListener {
                                             progressDialog.dismiss()
-                                            Toast.makeText(
-                                                context,
-                                                "Lista Creada",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            val rootView = requireActivity().findViewById<View>(android.R.id.content)
+                                            val snackbar = Snackbar.make(
+                                                rootView,
+                                                Html.fromHtml("<b>Lista Creada</b>"),
+                                                Snackbar.LENGTH_SHORT
+                                            )
+
+                                            snackbar.setTextColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.black
+                                                )
+                                            )
+                                            snackbar.setBackgroundTint(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.crear
+                                                )
+                                            )
+
+                                            val drawableFondo = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.background_dialog
+                                            )
+                                            snackbar.view.background = drawableFondo
+                                            snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                            snackbar.show()
                                             cerrar()
                                         }
                                         .addOnFailureListener { exception ->

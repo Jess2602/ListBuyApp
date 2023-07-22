@@ -53,8 +53,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/price"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:text="0"
             android:imeOptions="actionNext"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +77,11 @@
             android:layout_height="match_parent"
             android:hint="@string/amount"
             android:imeOptions="actionDone"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:text="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

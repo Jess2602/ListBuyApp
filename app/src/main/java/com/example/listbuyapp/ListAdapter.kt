@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listbuyapp.data.History
 import com.example.listbuyapp.data.HistoryViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
@@ -123,24 +125,57 @@ class ListAdapter(private var list: List<ListUser>) :
                 val history = History(0, item.name_list, item.category, formattedDate)
                 mHistoryViewModel.addHistory(history)
 
-                db.collection("Users").document(user?.email.toString()).collection("List")
-                    .document(item.id_list).delete().addOnSuccessListener {
-                        Toast.makeText(
-                            activity,
-                            "Se Elimino ${item.name_list}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        progressDialog.dismiss()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(
-                            activity,
-                            "No se pudo eliminar ${item.name_list}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        progressDialog.dismiss()
+                val itemListUserRef = db.collection("Users").document(user?.email.toString())
+                    .collection("List").document(item.id_list)
+                    .collection("ItemListUser")
+                itemListUserRef.get().addOnSuccessListener { snapshot ->
+                    for (document in snapshot) {
+                        document.reference.delete()
                     }
 
+                    // Eliminar el documento de la subcolección "List"
+                    db.collection("Users").document(user?.email.toString())
+                        .collection("List").document(item.id_list)
+                        .delete()
+                        .addOnSuccessListener {
+                            val rootView = activity.findViewById<View>(android.R.id.content)
+                            val snackbar = Snackbar.make(
+                                rootView,
+                                Html.fromHtml("<b>Se Elimino ${item.name_list}</b>"),
+                                Snackbar.LENGTH_LONG
+                            )
+
+                            snackbar.setTextColor(
+                                ContextCompat.getColor(
+                                    activity,
+                                    R.color.white
+                                )
+                            )
+                            snackbar.setBackgroundTint(
+                                ContextCompat.getColor(
+                                    activity,
+                                    R.color.error
+                                )
+                            )
+
+                            val drawableFondo = ContextCompat.getDrawable(
+                                activity,
+                                R.drawable.background_dialog
+                            )
+                            snackbar.view.background = drawableFondo
+                            snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                            snackbar.show()
+                            progressDialog.dismiss()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(
+                                activity,
+                                "No se pudo eliminar $e",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            progressDialog.dismiss()
+                        }
+                }
                 dialog.dismiss()
             }
             alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
