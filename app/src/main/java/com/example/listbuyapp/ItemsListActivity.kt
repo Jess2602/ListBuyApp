@@ -245,6 +245,7 @@ class ItemsListActivity : AppCompatActivity() {
                         val listItems = document.toObject(ItemListUser::class.java)
                         listItems.name_item = document["name_item"].toString()
                         listItems.id_item = document["id_item"].toString()
+                        listItems.unit_item = document["unit_item"].toString()
                         listItems.id_list = document["id_list"].toString()
                         listItems.price_item = document["price_item"].toString().toDouble()
                         listItems.amount_item = document["amount_item"].toString().toInt()

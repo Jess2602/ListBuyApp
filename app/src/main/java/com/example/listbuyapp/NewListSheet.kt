@@ -71,13 +71,13 @@ class NewListSheet : BottomSheetDialogFragment() {
             progressDialog.show()
             progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
             val listRef = db.collection("Users").document(user?.email.toString()).collection("List")
-                .whereEqualTo("name_list", binding.listName.text.toString())
+                .whereEqualTo("name_list", binding.listName.text.toString().trim())
             listRef.get()
                 .addOnSuccessListener { querySnapshot ->
                     if (querySnapshot.isEmpty) {
                         val categoriesCollection = db.collection("Categories")
                         val categoryDocument =
-                            categoriesCollection.document(binding.listCategory.text.toString())
+                            categoriesCollection.document(binding.listCategory.text.toString().trim())
 
                         categoryDocument.get()
                             .addOnSuccessListener { snapshot ->
@@ -90,8 +90,8 @@ class NewListSheet : BottomSheetDialogFragment() {
                                     val newListDocumentId = newListDocument.id
 
                                     val listData = hashMapOf(
-                                        "name_list" to binding.listName.text.toString(),
-                                        "category" to binding.listCategory.text.toString(),
+                                        "name_list" to binding.listName.text.toString().trim(),
+                                        "category" to binding.listCategory.text.toString().trim(),
                                         "id_list" to newListDocumentId
                                     )
 

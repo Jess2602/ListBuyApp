@@ -20,7 +20,7 @@
     <string name="add_new_item">Add new item</string>
     <string name="item_name">Item Name</string>
     <string name="save">Save</string>
-    <string name="price">Price</string>
+    <string name="price">Price by Unit</string>
     <string name="amount">Amount</string>
     <string name="date">Date</string>
 </resources>

@@ -37,7 +37,7 @@ class EditListSheet : BottomSheetDialogFragment() {
         binding.editListName.setText(list)
 
         binding.editListButton.setOnClickListener {
-            editAction(list.toString(), id_list.toString())
+            editAction(list.toString().trim(), id_list.toString().trim())
         }
     }
 
@@ -47,7 +47,7 @@ class EditListSheet : BottomSheetDialogFragment() {
 
     private fun editAction(List: String, Id: String) {
         if (binding.editListName.text.toString().isNotEmpty()) {
-            if (binding.editListName.text.toString() != List) {
+            if (binding.editListName.text.toString().trim() != List) {
                 val progressDialog = ProgressDialog(context)
                 progressDialog.setMessage("Editando Lista..")
                 progressDialog.setCancelable(false)
@@ -56,7 +56,7 @@ class EditListSheet : BottomSheetDialogFragment() {
                 val validationRef = db.collection("Users")
                     .document(user?.email.toString())
                     .collection("List")
-                    .whereEqualTo("name_list", binding.editListName.text.toString())
+                    .whereEqualTo("name_list", binding.editListName.text.toString().trim())
 
                 validationRef.get()
                     .addOnSuccessListener { querySnapshot ->
@@ -67,7 +67,7 @@ class EditListSheet : BottomSheetDialogFragment() {
                                 .document(Id)
 
                             val newData = hashMapOf(
-                                "name_list" to binding.editListName.text.toString(),
+                                "name_list" to binding.editListName.text.toString().trim(),
                             )
 
                             userRef.update(newData as Map<String, Any>)
@@ -76,7 +76,7 @@ class EditListSheet : BottomSheetDialogFragment() {
                                     val rootView = requireActivity().findViewById<View>(android.R.id.content)
                                     val snackbar = Snackbar.make(
                                         rootView,
-                                        Html.fromHtml("<b>${binding.editListName.text.toString()} Actualizada</b>"),
+                                        Html.fromHtml("<b>${binding.editListName.text.toString().trim()} Actualizada</b>"),
                                         Snackbar.LENGTH_SHORT
                                     )
 

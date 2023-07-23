@@ -73,8 +73,8 @@ class Login : AppCompatActivity() {
                 progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
 
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                    binding.TextFieldEmail.text.toString(),
-                    binding.TextFieldPass.text.toString()
+                    binding.TextFieldEmail.text.toString().trim(),
+                    binding.TextFieldPass.text.toString().trim()
                 ).addOnCompleteListener { task ->
                     progressDialog.dismiss()
 
@@ -168,8 +168,8 @@ class Login : AppCompatActivity() {
                 progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
 
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                    binding.TextFieldEmail.text.toString(),
-                    binding.TextFieldPass.text.toString()
+                    binding.TextFieldEmail.text.toString().trim(),
+                    binding.TextFieldPass.text.toString().trim()
                 ).addOnCompleteListener { task ->
                     progressDialog.dismiss()
 

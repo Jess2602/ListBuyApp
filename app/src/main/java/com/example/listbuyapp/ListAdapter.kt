@@ -118,7 +118,7 @@ class ListAdapter(private var list: List<ListUser>) :
                 progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
 
                 val currentTime = Date()
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm")
                 val formattedDate = dateFormat.format(currentTime)
 
                 mHistoryViewModel = ViewModelProvider(activity)[HistoryViewModel::class.java]

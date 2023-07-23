@@ -3,13 +3,12 @@ package com.example.listbuyapp
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.listbuyapp.databinding.FragmentEditListSheetBinding
 import com.example.listbuyapp.databinding.FragmentNewItemSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
@@ -39,13 +38,56 @@ class NewItemSheet : BottomSheetDialogFragment() {
 
         val id_list = arguments?.getString("Id_List")
         val list = arguments?.getString("List")
+
+        val listUnit = ArrayList<String>()
+        listUnit.add("pz")
+        listUnit.add("kg")
+        listUnit.add("L")
+        listUnit.add("g")
+        listUnit.add("lb")
+        listUnit.add("ml")
+
+        if (listUnit.isNotEmpty()) {
+            binding.UnitItem.setText(
+                listUnit[0],
+                false
+            )
+        }
+
+        val numberAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, listUnit)
+        binding.UnitItem.setAdapter(numberAdapter)
+
         binding.saveNewItemButton.setOnClickListener {
             saveNewItemAction(
                 list.toString(),
                 id_list.toString()
             )
         }
+        binding.sumaItem.setOnClickListener {
+            addOneToAmount()
+        }
 
+        binding.restItem.setOnClickListener {
+            subtractOneFromAmount()
+        }
+
+    }
+
+    private fun addOneToAmount() {
+        val currentAmount = binding.amountItem.text.toString().toIntOrNull() ?: 0
+        val newAmount = currentAmount + 1
+        if (newAmount <= 999) {
+            binding.amountItem.setText(newAmount.toString())
+        }
+    }
+
+    private fun subtractOneFromAmount() {
+        val currentAmount = binding.amountItem.text.toString().toIntOrNull() ?: 0
+        val newAmount = currentAmount - 1
+        if (newAmount >= 1) {
+            binding.amountItem.setText(newAmount.toString())
+        }
     }
 
     private fun close() {
@@ -67,7 +109,7 @@ class NewItemSheet : BottomSheetDialogFragment() {
 
             val listRef = db.collection("Users").document(user?.email.toString()).collection("List")
                 .document(id_List).collection("ItemListUser")
-                .whereEqualTo("name_item", binding.nameItem.text.toString())
+                .whereEqualTo("name_item", binding.nameItem.text.toString().trim())
             listRef.get()
                 .addOnSuccessListener { querySnapshot ->
                     if (querySnapshot.isEmpty) {
@@ -81,13 +123,16 @@ class NewItemSheet : BottomSheetDialogFragment() {
                         val itemListUserDocument = ItemListUserCollection.document()
                         val newItemListUserId = itemListUserDocument.id
 
-                        val priceItem = binding.priceItem.text.toString().toDoubleOrNull() ?: 0.0
-                        val amountItem = binding.amountItem.text.toString().toIntOrNull() ?: 0
+                        val priceItem =
+                            binding.priceItem.text.toString().trim().toDoubleOrNull() ?: 0.0
+                        val amountItem =
+                            binding.amountItem.text.toString().trim().toIntOrNull() ?: 0
 
                         val listData = hashMapOf(
-                            "name_item" to binding.nameItem.text.toString(),
+                            "name_item" to binding.nameItem.text.toString().trim(),
                             "price_item" to priceItem,
                             "amount_item" to amountItem,
+                            "unit_item" to binding.UnitItem.text.toString().trim(),
                             "checked_item" to false,
                             "id_list" to id_List,
                             "id_item" to newItemListUserId
@@ -96,7 +141,8 @@ class NewItemSheet : BottomSheetDialogFragment() {
                             .set(listData)
                             .addOnSuccessListener {
                                 progressDialog.dismiss()
-                                val rootView = requireActivity().findViewById<View>(android.R.id.content)
+                                val rootView =
+                                    requireActivity().findViewById<View>(android.R.id.content)
                                 val snackbar = Snackbar.make(
                                     rootView,
                                     Html.fromHtml("<b>Item Creado</b>"),

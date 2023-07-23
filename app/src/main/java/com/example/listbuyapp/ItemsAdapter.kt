@@ -39,7 +39,7 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
     @SuppressLint("Range")
     override fun onBindViewHolder(holderitem: ItemViewHolder, position: Int) {
         val item = items[position]
-        holderitem.amount.text = item.amount_item.toString()
+        holderitem.amount.text = "${item.amount_item.toString()} ${item.unit_item.toString()}"
 
         if (!item.checked_item) {
             holderitem.itemName.text = item.name_item
