@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 
 class History(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val listName_history: String,
-    val listCategory_history: String,
-    val listDate_history: String,
+    var id: Int,
+    var listName_history: String,
+    var listCategory_history: String,
+    var listDate_history: String,
 )

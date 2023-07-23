@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class HistoryViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<History>>
+    val readAllData: LiveData<List<History>>
     private val repository: HistoryRepository
 
     init {

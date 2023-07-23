@@ -22,4 +22,5 @@
     <string name="save">Save</string>
     <string name="price">Price</string>
     <string name="amount">Amount</string>
+    <string name="date">Date</string>
 </resources>
