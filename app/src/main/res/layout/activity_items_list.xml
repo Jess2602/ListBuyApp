@@ -35,12 +35,20 @@
                 app:navigationIcon="@drawable/back_icon">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/shareItems"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center"
+                    android:paddingEnd="10dp"
+                    android:src="@android:drawable/ic_menu_share" />
+
+                <ImageView
+                    android:id="@+id/deleteAllItems"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:paddingEnd="10dp"
-                    android:src="@drawable/icon_menu_vertical" />
-
+                    android:src="@android:drawable/ic_menu_delete" />
             </com.google.android.material.appbar.MaterialToolbar>
 
             <ProgressBar
@@ -158,11 +166,12 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/emptyTextViewItem"
         android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,12 +190,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="What do you need to buy?"
-            android:textSize="22dp"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="22dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
@@ -196,8 +205,8 @@
             android:layout_height="wrap_content"
             android:text="tap the button to create your list"
             android:textAlignment="center"
-            android:textSize="16dp"
             android:textColor="@color/white"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -205,6 +214,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
     </LinearLayout>
+
     <FrameLayout
         android:layout_width="65dp"
         android:layout_height="65dp"

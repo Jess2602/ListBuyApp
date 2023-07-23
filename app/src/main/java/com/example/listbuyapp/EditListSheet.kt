@@ -76,7 +76,7 @@ class EditListSheet : BottomSheetDialogFragment() {
                                     val rootView = requireActivity().findViewById<View>(android.R.id.content)
                                     val snackbar = Snackbar.make(
                                         rootView,
-                                        Html.fromHtml("<b>Lista ${List} Actualizada</b>"),
+                                        Html.fromHtml("<b>${binding.editListName.text.toString()} Actualizada</b>"),
                                         Snackbar.LENGTH_SHORT
                                     )
 
@@ -89,7 +89,7 @@ class EditListSheet : BottomSheetDialogFragment() {
                                     snackbar.setBackgroundTint(
                                         ContextCompat.getColor(
                                             requireContext(),
-                                            R.color.crear
+                                            R.color.botonbase
                                         )
                                     )
 
