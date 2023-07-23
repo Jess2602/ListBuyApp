@@ -47,15 +47,18 @@ class HistoricalAdapter(var historicalList: List<History>) :
             val alertDialogBuilder = android.app.AlertDialog.Builder(activity)
             alertDialogBuilder.setTitle("Desea Eliminar la Lista?")
                 .setMessage("¿Estás seguro que deseas eliminar la lista del Historial?")
-                .setPositiveButton("Eliminar") { _, _ ->
+                .setPositiveButton("Eliminar") { dialog, _ ->
                     val progressDialog = ProgressDialog(activity)
                     progressDialog.setMessage("Eliminando Lista del History..")
                     progressDialog.setCancelable(false)
                     progressDialog.show()
                     progressDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
 
-                    progressDialog.dismiss()
-                    // Mostrar Snackbar de éxito
+                    mHistoryViewModel = ViewModelProvider(activity)[HistoryViewModel::class.java]
+                    mHistoryViewModel.deleteHistoryById(historicalListId)
+
+
+
                     val rootView = activity.findViewById<View>(android.R.id.content)
                     val snackbar = Snackbar.make(
                         rootView,
@@ -82,6 +85,8 @@ class HistoricalAdapter(var historicalList: List<History>) :
                     )
                     snackbar.view.background = drawableFondo
                     snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    dialog.dismiss()
+                    progressDialog.dismiss()
                     snackbar.show()
                 }
                 .setNegativeButton("Cancelar", null)

@@ -117,7 +117,7 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
                 holderitem.checkedlottie.speed = -4.5f
                 holderitem.checkedlottie.playAnimation()
 
-                // Agregar un Listener a la animación
+
                 holderitem.checkedlottie.addAnimatorListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         animationInProgress = false // La animación ha terminado, permitir otro clic

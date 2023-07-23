@@ -12,4 +12,6 @@ interface HistoryDao {
     @Query("SELECT * FROM history_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<History>>
 
+    @Query("DELETE FROM history_table WHERE id = :historyId")
+    fun deleteHistory(historyId: Int)
 }

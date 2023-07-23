@@ -9,4 +9,7 @@ class HistoryRepository(private val historyDao: HistoryDao) {
     suspend fun addHistory(history: History) {
         historyDao.addHistory(history)
     }
+    suspend fun deleteHistoryById(historyId: Int) {
+        historyDao.deleteHistory(historyId)
+    }
 }
