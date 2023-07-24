@@ -1,6 +1,7 @@
 package com.example.listbuyapp
 
 import android.R
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
@@ -107,6 +108,11 @@ class EditListItemFragment : BottomSheetDialogFragment() {
                 binding.editAmountItem.text.toString().trim() != amount.toString() ||
                 binding.editUnitItem.text.toString().trim() != unit
             ) {
+                val progressDialog = ProgressDialog(context)
+                progressDialog.setMessage("Editando Item..")
+                progressDialog.setCancelable(false)
+                progressDialog.show()
+                progressDialog.window?.setBackgroundDrawableResource(com.example.listbuyapp.R.drawable.background_dialog)
 
                 val validationRef = db.collection("Users")
                     .document(user?.email.toString())
@@ -115,7 +121,11 @@ class EditListItemFragment : BottomSheetDialogFragment() {
 
                 validationRef.get()
                     .addOnSuccessListener { querySnapshot ->
-                        if (querySnapshot.isEmpty) {
+                        if (querySnapshot.isEmpty || binding.editPriceItem.text.toString()
+                                .trim() != price.toString() || binding.editAmountItem.text.toString()
+                                .trim() != amount.toString() || binding.editUnitItem.text.toString()
+                                .trim() != unit
+                        ) {
                             val userRef = db.collection("Users")
                                 .document(user?.email.toString())
                                 .collection("List").document(Id_List).collection("ItemListUser")
@@ -126,55 +136,67 @@ class EditListItemFragment : BottomSheetDialogFragment() {
                             val amountItem =
                                 binding.editAmountItem.text.toString().trim().toIntOrNull() ?: 0
 
-                            val newData = hashMapOf(
-                                "name_item" to binding.editNameItem.text.toString().trim(),
-                                "price_item" to priceItem,
-                                "amount_item" to amountItem,
-                                "unit_item" to binding.editUnitItem.text.toString().trim()
-                            )
-                            userRef.update(newData as Map<String, Any>)
-                                .addOnSuccessListener {
-                                    val rootView =
-                                        requireActivity().findViewById<View>(android.R.id.content)
-                                    val snackbar = Snackbar.make(
-                                        rootView,
-                                        Html.fromHtml(
-                                            "<b>${
-                                                binding.editNameItem.text.toString().trim()
-                                            } Actualizada</b>"
-                                        ),
-                                        Snackbar.LENGTH_SHORT
-                                    )
-                                    snackbar.setTextColor(
-                                        ContextCompat.getColor(
-                                            requireContext(),
-                                            com.example.listbuyapp.R.color.black
+                            if (querySnapshot.isEmpty || binding.editNameItem.text.toString()
+                                    .trim() == Item
+                            ) {
+                                val newData = hashMapOf(
+                                    "name_item" to binding.editNameItem.text.toString().trim(),
+                                    "price_item" to priceItem,
+                                    "amount_item" to amountItem,
+                                    "unit_item" to binding.editUnitItem.text.toString().trim()
+                                )
+                                userRef.update(newData as Map<String, Any>)
+                                    .addOnSuccessListener {
+                                        val rootView =
+                                            requireActivity().findViewById<View>(android.R.id.content)
+                                        val snackbar = Snackbar.make(
+                                            rootView,
+                                            Html.fromHtml(
+                                                "<b>${
+                                                    binding.editNameItem.text.toString().trim()
+                                                } Actualizada</b>"
+                                            ),
+                                            Snackbar.LENGTH_SHORT
                                         )
-                                    )
-                                    snackbar.setBackgroundTint(
-                                        ContextCompat.getColor(
-                                            requireContext(),
-                                            com.example.listbuyapp.R.color.botonbase
+                                        snackbar.setTextColor(
+                                            ContextCompat.getColor(
+                                                requireContext(),
+                                                com.example.listbuyapp.R.color.black
+                                            )
                                         )
-                                    )
-                                    val drawableFondo = ContextCompat.getDrawable(
-                                        requireContext(),
-                                        com.example.listbuyapp.R.drawable.background_dialog
-                                    )
-                                    snackbar.view.background = drawableFondo
-                                    snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                                    snackbar.show()
-                                    close()
-                                }
-                                .addOnFailureListener { exception ->
-                                    Toast.makeText(
-                                        context,
-                                        "Error al actualizar el item: ${exception.message}",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    close()
-                                }
+                                        snackbar.setBackgroundTint(
+                                            ContextCompat.getColor(
+                                                requireContext(),
+                                                com.example.listbuyapp.R.color.botonbase
+                                            )
+                                        )
+                                        val drawableFondo = ContextCompat.getDrawable(
+                                            requireContext(),
+                                            com.example.listbuyapp.R.drawable.background_dialog
+                                        )
+                                        snackbar.view.background = drawableFondo
+                                        snackbar.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                        snackbar.show()
+                                        close()
+                                        progressDialog.dismiss()
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Toast.makeText(
+                                            context,
+                                            "Error al actualizar el item: ${exception.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        close()
+                                        progressDialog.dismiss()
+                                    }
+                            } else {
+                                progressDialog.dismiss()
+                                Toast.makeText(context, "Verifique el Nombre", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+
                         } else {
+                            progressDialog.dismiss()
                             Toast.makeText(context, "Ese item ya existe", Toast.LENGTH_SHORT).show()
                         }
                     }
