@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="8dp"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/item_icon">
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="8dp"
         android:inputType="numberDecimal"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/price_icon">
@@ -63,15 +63,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="8dp"
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputLayout.Custom"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:inputType="number">
 
@@ -92,10 +92,9 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputLayout.Custom2"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_weight="3">
-
 
             <AutoCompleteTextView
                 android:id="@+id/Unit_item"
@@ -107,33 +106,28 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/sumaItem"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginStart="2dp"
+            android:src="@mipmap/add_sum"
             android:layout_weight="1.5"
-            android:background="@drawable/radius_button"
-            android:backgroundTint="@color/botonbase"
-            android:text="+"
-            android:textColor="@color/black"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+        </ImageView>
+
+        <ImageView
+            android:padding="2.5dp"
             android:id="@+id/restItem"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginStart="2dp"
+            android:src="@mipmap/minus_rest"
             android:layout_weight="1.5"
-            android:background="@drawable/radius_button"
-            android:backgroundTint="@color/botonbase"
-            android:text="-"
-            android:textColor="@color/black"
-            android:textSize="45sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent">
+
+        </ImageView>
 
     </LinearLayout>
 
