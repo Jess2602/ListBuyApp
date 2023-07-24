@@ -150,18 +150,6 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
         }
 
 
-
-        holderitem.backgroundItems.setOnClickListener {
-            val db = FirebaseFirestore.getInstance()
-            val user = FirebaseAuth.getInstance().currentUser
-            val activity = it.context as AppCompatActivity
-            Toast.makeText(
-                activity,
-                "Se Elimino ${item.name_item}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
         holderitem.deleteItem.setOnClickListener {
             val db = FirebaseFirestore.getInstance()
             val user = FirebaseAuth.getInstance().currentUser
@@ -235,6 +223,23 @@ class ItemsAdapter(private val items: List<ItemListUser>) :
             negativeButton.setTextColor(ContextCompat.getColor(activity, R.color.botonbase))
 
             alertDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
+        }
+
+        holderitem.backgroundItems.setOnClickListener {
+            val editListItemSheet = EditListItemFragment()
+            val bundle = Bundle()
+            bundle.putString("Id_List", item.id_list)
+            bundle.putString("Id_Item", item.id_item)
+            bundle.putString("Name_Item", item.name_item)
+            bundle.putString("Unit_Item", item.unit_item)
+            bundle.putDouble("Price_Item", item.price_item)
+            bundle.putInt("Amount_Item", item.amount_item)
+            editListItemSheet.arguments = bundle
+            editListItemSheet.show(
+                (holderitem.itemView.context as FragmentActivity).supportFragmentManager,
+                "editItemTag"
+            )
+            true
         }
     }
 

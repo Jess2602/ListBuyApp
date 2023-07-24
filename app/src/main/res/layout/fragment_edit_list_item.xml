@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_bottom_sheet"
+    android:orientation="vertical"
+    tools:context=".EditListItemFragment">
+
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/edit_item"
+        android:textSize="30sp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/TextInputLayout.Custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/item_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_name_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:imeOptions="actionNext"
+            android:hint="@string/item_name"
+            android:inputType="textCapSentences" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/TextInputLayout.Custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
+        android:inputType="numberDecimal"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/price_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_price_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/price"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:text="0" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayout.Custom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:inputType="number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_amount_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/amount"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="3"
+                android:maxLines="1"
+                android:selectAllOnFocus="true"
+                android:text="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayout.Custom2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="3">
+
+            <AutoCompleteTextView
+                android:id="@+id/edit_Unit_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Unit"
+                android:inputType="none">
+            </AutoCompleteTextView>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/edit_sumaItem"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:src="@mipmap/add_sum"
+            android:layout_weight="1.5"
+            android:layout_height="match_parent">
+
+        </ImageView>
+
+        <ImageView
+            android:padding="2.5dp"
+            android:id="@+id/edit_restItem"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:src="@mipmap/minus_rest"
+            android:layout_weight="1.5"
+            android:layout_height="match_parent">
+
+        </ImageView>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveEditItemButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/radius_button"
+        android:backgroundTint="@color/botonbase"
+        android:text="@string/save"
+        android:textColor="@color/black" />
+
+</LinearLayout>
