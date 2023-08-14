@@ -31,6 +31,17 @@ import java.util.Date
 class ListAdapter(private var list: List<ListUser>) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     private lateinit var mHistoryViewModel: HistoryViewModel
+
+    private var originalList: List<ListUser> = list
+    fun filter(query: String) {
+        list = if (query.isEmpty()) {
+            originalList
+        } else {
+            originalList.filter { it.name_list.contains(query, ignoreCase = true) }
+        }
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

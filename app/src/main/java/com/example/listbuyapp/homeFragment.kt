@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import android.os.Handler
+import androidx.appcompat.widget.SearchView
 
 
 class homeFragment : Fragment() {
@@ -35,6 +36,18 @@ class homeFragment : Fragment() {
         binding.addListButton.setOnClickListener {
             NewListSheet().show(childFragmentManager, "newListTag")
         }
+
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter(newText.orEmpty())
+                return true
+            }
+        })
+
         showRecyclerList()
     }
 
